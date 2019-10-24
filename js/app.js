@@ -22,7 +22,7 @@ MyImagesObj.prototype.render = function() {
   imgClone.find('h2').text(this.title);
   imgClone.find('img').attr('src', this.image_url);
   imgClone.find('img').attr('alt', this.description);
-  imgClone.find('img').attr('keyword', this.keyword);
+  imgClone.find('img, p, h2').attr('keyword', this.keyword);
   imgClone.find('p').text(this.description);
   imgClone.removeClass('clone');
   imgClone.attr('class', this.title);
@@ -49,7 +49,6 @@ $(() => MyImagesObj.readJson());
 
 $('#keywords').change(function(){
   let $selection = $(this).val();
-  $('img').hide();
-  $(`img[keyword="${$selection}"]`).show();
+  $('img, p, h2').hide();
+  $(`img[keyword="${$selection}"], p[keyword="${$selection}"], h2[keyword="${$selection}"]`).show();
 });
-
