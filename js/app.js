@@ -22,10 +22,12 @@ MyImagesObj.prototype.render = function() {
   imgClone.find('h2').text(this.title);
   imgClone.find('img').attr('src', this.image_url);
   imgClone.find('img').attr('alt', this.description);
+  imgClone.find('img').attr('keyword', this.keyword);
   imgClone.find('p').text(this.description);
   imgClone.removeClass('clone');
   imgClone.attr('class', this.title);
 };
+
 
 MyImagesObj.readJson = () => {
   $.get('data/page-1.json', 'json')
@@ -40,6 +42,14 @@ MyImagesObj.readJson = () => {
 MyImagesObj.loadimages = () => {
   MyImagesObj.myImages.forEach(img => img.render());
 };
-  
+
 $(() => MyImagesObj.readJson());
+
+
+
+$('#keywords').change(function(){
+  let $selection = $(this).val();
+  $('img').hide();
+  $(`img[keyword="${$selection}"]`).show();
+});
 
